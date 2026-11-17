@@ -1,0 +1,93 @@
+[
+    {
+        "id": "cat_salary",
+        "name": "Salary & Wages",
+        "color": "#0D5D61",
+        "icon": "briefcase",
+        "parent": null
+    },
+    {
+        "id": "cat_side",
+        "name": "Side Hustle",
+        "color": "#29A4A6",
+        "icon": "laptop-code",
+        "parent": null
+    },
+    {
+        "id": "cat_passive",
+        "name": "Passive Income",
+        "color": "#D49D43",
+        "icon": "chart-line",
+        "parent": null
+    },
+    {
+        "id": "cat_housing",
+        "name": "Housing & Rent",
+        "color": "#A81360",
+        "icon": "home",
+        "parent": null
+    },
+    {
+        "id": "cat_groceries",
+        "name": "Groceries",
+        "color": "#0D5D61",
+        "icon": "shopping-basket",
+        "parent": null
+    },
+    {
+        "id": "cat_dining",
+        "name": "Dining Out",
+        "color": "#29A4A6",
+        "icon": "utensils",
+        "parent": "cat_groceries"
+    },
+    {
+        "id": "cat_transport",
+        "name": "Transportation",
+        "color": "#D49D43",
+        "icon": "car",
+        "parent": null
+    },
+    {
+        "id": "cat_utilities",
+        "name": "Utilities & Bills",
+        "color": "#A81360",
+        "icon": "bolt",
+        "parent": null
+    },
+    {
+        "id": "cat_entertainment",
+        "name": "Entertainment",
+        "color": "#0D5D61",
+        "icon": "film",
+        "parent": null
+    },
+    {
+        "id": "cat_savings",
+        "name": "Savings & Investments",
+        "color": "#D49D43",
+        "icon": "piggy-bank",
+        "parent": null
+    },
+    {
+        "id": "cat_c2ca6265",
+        "name": "Parents",
+        "color": "#00f2ff",
+        "icon": "piggy-bank",
+        "parent": null
+    },
+    {
+        "id": "cat_bbc3574a",
+        "name": "Shopping",
+        "color": "#ff0088",
+        "icon": "shopping-basket",
+        "parent": null
+    },
+    {
+        "id": "cat_008ceb97",
+        "name": "Hostel Living",
+        "color": "#ff0000",
+        "icon": "home",
+        "parent": null
+    }
+]

@@ -1,0 +1,402 @@
+[
+    {
+        "timestamp": "2026-06-07T23:13:11.625697",
+        "action": "UPDATE_EXPENSE",
+        "details": "Updated expense 'University Day' details."
+    },
+    {
+        "timestamp": "2026-06-07T23:12:57.201037",
+        "action": "UPDATE_CATEGORY",
+        "details": "Modified category details for 'Shopping'"
+    },
+    {
+        "timestamp": "2026-06-07T23:12:41.391972",
+        "action": "UPDATE_CATEGORY",
+        "details": "Modified category details for 'Hostel Living'"
+    },
+    {
+        "timestamp": "2026-06-07T23:12:28.803159",
+        "action": "CREATE_CATEGORY",
+        "details": "Created sub-category: Hostel Living"
+    },
+    {
+        "timestamp": "2026-06-07T23:11:42.792036",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'University Day' of amount 270 to category 'Dining Out'"
+    },
+    {
+        "timestamp": "2026-06-07T23:10:14.382500",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'Transport' of amount 110 to category 'Transportation'"
+    },
+    {
+        "timestamp": "2026-06-07T23:09:23.818074",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'Transport' of amount 30 to category 'Transportation'"
+    },
+    {
+        "timestamp": "2026-06-07T23:08:26.269522",
+        "action": "CREATE_INCOME",
+        "details": "Registered income 'Weekly  Handmoney' of amount 500"
+    },
+    {
+        "timestamp": "2026-06-03T21:22:21.684207",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'Lunch' of amount 100 to category 'Dining Out'"
+    },
+    {
+        "timestamp": "2026-06-03T21:21:14.615653",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'Transport' of amount 180 to category 'Transportation'"
+    },
+    {
+        "timestamp": "2026-06-03T21:20:16.047409",
+        "action": "CREATE_INCOME",
+        "details": "Registered income 'Pocket Money' of amount 1000"
+    },
+    {
+        "timestamp": "2026-06-02T20:39:06.108709",
+        "action": "UPDATE_EXPENSE",
+        "details": "Updated expense 'Transport' details."
+    },
+    {
+        "timestamp": "2026-06-02T20:38:50.036715",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'Transport' of amount 10 to category 'Salary & Wages'"
+    },
+    {
+        "timestamp": "2026-06-02T20:37:58.716494",
+        "action": "UPDATE_GOAL",
+        "details": "Updated details for savings target 'Emergency Fund'"
+    },
+    {
+        "timestamp": "2026-06-02T20:37:34.277763",
+        "action": "CREATE_INCOME",
+        "details": "Registered income 'Transport' of amount 20"
+    },
+    {
+        "timestamp": "2026-05-31T23:51:12.012857",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'water Battle' of amount 40 to category 'Groceries'"
+    },
+    {
+        "timestamp": "2026-05-26T20:32:27.069507",
+        "action": "UPDATE_GOAL",
+        "details": "Updated details for savings target 'Phone Glass Protector'"
+    },
+    {
+        "timestamp": "2026-05-26T20:31:39.744642",
+        "action": "DELETE_GOAL",
+        "details": "Deleted savings target 'Premium Web Design Course'"
+    },
+    {
+        "timestamp": "2026-05-26T20:31:29.332511",
+        "action": "UPDATE_GOAL",
+        "details": "Updated details for savings target 'Emergency Fund'"
+    },
+    {
+        "timestamp": "2026-05-26T20:30:27.936627",
+        "action": "CREATE_EXPENSE",
+        "details": "Added expense 'Eid Shooping' of amount 4200 to category 'Shopping'"
+    },
+    {
+        "timestamp": "2026-05-26T20:29:12.716300",
+        "action": "CREATE_CATEGORY",
+        "details": "Created sub-category: Shopping"
+    },
+    {
+        "timestamp": "2026-05-26T20:27:39.227380",
+        "action": "CREATE_INCOME",
+        "details": "Registered income 'For Shopping' of amount 4200"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:48.647718",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Product Dividends'"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:46.435545",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Subscription (Design Tool)'"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:43.751299",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'Cozy Modern Apartment Rent'"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:38.648122",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Entertainment'"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:36.950168",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Dining Out'"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:33.744749",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Groceries'"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:29.675815",
+        "action": "BULK_DELETE_EXPENSES",
+        "details": "Perform bulk-deletion of 8 expenses."
+    },
+    {
+        "timestamp": "2026-05-26T20:25:24.224542",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:22.106290",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'SaaS Product Dividends' ($1200.0)"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:20.368683",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T20:25:18.576946",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Freelance Landing Page Contract' ($950.0)"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:35.211936",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Product Dividends'"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:32.969870",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Subscription (Design Tool)'"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:30.518057",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'Cozy Modern Apartment Rent'"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:16.397315",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Entertainment'"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:14.139149",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Dining Out'"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:11.803891",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Groceries'"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:08.308613",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:04.845577",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'SaaS Product Dividends' ($1200.0)"
+    },
+    {
+        "timestamp": "2026-05-26T20:16:01.057764",
+        "action": "BULK_DELETE_EXPENSES",
+        "details": "Perform bulk-deletion of 8 expenses."
+    },
+    {
+        "timestamp": "2026-05-26T20:14:17.949075",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T20:14:15.130351",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Freelance Landing Page Contract' ($950.0)"
+    },
+    {
+        "timestamp": "2026-05-26T17:28:13.612210",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Weekly  Handmoney' ($1000.0)"
+    },
+    {
+        "timestamp": "2026-05-26T17:27:52.708732",
+        "action": "CREATE_INCOME",
+        "details": "Registered income 'Weekly  Handmoney' of amount 1000"
+    },
+    {
+        "timestamp": "2026-05-26T17:26:39.868546",
+        "action": "UPDATE_CATEGORY",
+        "details": "Modified category details for 'Parents'"
+    },
+    {
+        "timestamp": "2026-05-26T17:26:22.543676",
+        "action": "CREATE_CATEGORY",
+        "details": "Created sub-category: Parents"
+    },
+    {
+        "timestamp": "2026-05-26T17:25:11.991020",
+        "action": "DELETE_GOAL",
+        "details": "Deleted savings target 'New Designer Desk Setup'"
+    },
+    {
+        "timestamp": "2026-05-26T17:25:10.246805",
+        "action": "DELETE_GOAL",
+        "details": "Deleted savings target 'Premium Web Design Course'"
+    },
+    {
+        "timestamp": "2026-05-26T17:25:08.168089",
+        "action": "DELETE_GOAL",
+        "details": "Deleted savings target 'Emergency Fund'"
+    },
+    {
+        "timestamp": "2026-05-26T17:25:04.302916",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Product Dividends'"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:55.533565",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Subscription (Design Tool)'"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:52.927805",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'Cozy Modern Apartment Rent'"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:38.534728",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Entertainment'"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:36.693426",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Dining Out'"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:34.798605",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Groceries'"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:30.656554",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:28.295390",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'SaaS Product Dividends' ($1200.0)"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:25.958496",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:23.811271",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Freelance Landing Page Contract' ($950.0)"
+    },
+    {
+        "timestamp": "2026-05-26T17:24:17.709158",
+        "action": "BULK_DELETE_EXPENSES",
+        "details": "Perform bulk-deletion of 8 expenses."
+    },
+    {
+        "timestamp": "2026-05-26T14:24:06.412231",
+        "action": "SETTINGS_UPDATE",
+        "details": "System configuration preferences adjusted."
+    },
+    {
+        "timestamp": "2026-05-26T14:16:13.405119",
+        "action": "SETTINGS_UPDATE",
+        "details": "System configuration preferences adjusted."
+    },
+    {
+        "timestamp": "2026-05-26T14:14:47.011161",
+        "action": "SETTINGS_UPDATE",
+        "details": "System configuration preferences adjusted."
+    },
+    {
+        "timestamp": "2026-05-26T14:13:45.874373",
+        "action": "DELETE_GOAL",
+        "details": "Deleted savings target 'Premium Web Design Course'"
+    },
+    {
+        "timestamp": "2026-05-26T14:13:29.417397",
+        "action": "DELETE_GOAL",
+        "details": "Deleted savings target 'New Designer Desk Setup'"
+    },
+    {
+        "timestamp": "2026-05-26T14:13:27.434764",
+        "action": "DELETE_GOAL",
+        "details": "Deleted savings target 'Emergency Fund'"
+    },
+    {
+        "timestamp": "2026-05-26T14:13:20.121767",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Product Dividends'"
+    },
+    {
+        "timestamp": "2026-05-26T14:13:17.561589",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'SaaS Subscription (Design Tool)'"
+    },
+    {
+        "timestamp": "2026-05-26T14:13:15.362201",
+        "action": "DELETE_RECURRING",
+        "details": "Removed recurring rule for 'Cozy Modern Apartment Rent'"
+    },
+    {
+        "timestamp": "2026-05-26T14:12:22.521651",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Entertainment'"
+    },
+    {
+        "timestamp": "2026-05-26T14:12:20.192993",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Dining Out'"
+    },
+    {
+        "timestamp": "2026-05-26T14:12:17.939170",
+        "action": "DELETE_BUDGET",
+        "details": "Cleared budget settings for 'Groceries'"
+    },
+    {
+        "timestamp": "2026-05-26T14:11:55.946929",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T14:11:53.458829",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'SaaS Product Dividends' ($1200.0)"
+    },
+    {
+        "timestamp": "2026-05-26T14:11:51.401579",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Corporate Tech Salary' ($5400.0)"
+    },
+    {
+        "timestamp": "2026-05-26T14:11:49.355433",
+        "action": "DELETE_INCOME",
+        "details": "Deleted income 'Freelance Landing Page Contract' ($950.0)"
+    },
+    {
+        "timestamp": "2026-05-26T14:11:26.379330",
+        "action": "BULK_DELETE_EXPENSES",
+        "details": "Perform bulk-deletion of 8 expenses."
+    },
+    {
+        "timestamp": "2026-05-26T13:53:54.591471",
+        "action": "SYSTEM_INIT",
+        "details": "Premium Expense Tracker initialized with seed database records."
+    }
+]

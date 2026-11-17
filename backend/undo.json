@@ -1,0 +1,14 @@
+{
+    "type": "income",
+    "item": {
+        "id": "inc_1",
+        "title": "Corporate Tech Salary",
+        "amount": 5400.0,
+        "category": "Salary & Wages",
+        "date": "2026-04-01",
+        "note": "Primary employment salary payout",
+        "source_type": "salary",
+        "recurring": true,
+        "created_at": "2026-05-26T20:17:29.255336"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "currency": "BDT",
+    "currency_symbol": "৳",
+    "date_format": "YYYY-MM-DD",
+    "pin": "",
+    "pin_enabled": false,
+    "theme": "warm-matte",
+    "language": "en"
+}

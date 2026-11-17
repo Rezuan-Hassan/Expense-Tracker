@@ -1,0 +1,142 @@
+[
+    {
+        "id": "exp_aa4648e4",
+        "title": "University Day",
+        "amount": 270.0,
+        "category": "Hostel Living",
+        "date": "2026-06-07",
+        "note": "",
+        "tags": [
+            "Food",
+            "Rickshaw"
+        ],
+        "priority": "medium",
+        "payment_method": "Cash",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-06-07T23:11:42.765037"
+    },
+    {
+        "id": "exp_63288988",
+        "title": "Transport",
+        "amount": 110.0,
+        "category": "Transportation",
+        "date": "2026-06-06",
+        "note": "",
+        "tags": [
+            "Bus",
+            "Rickshaw"
+        ],
+        "priority": "medium",
+        "payment_method": "Cash",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-06-07T23:10:14.353357"
+    },
+    {
+        "id": "exp_cd75f790",
+        "title": "Transport",
+        "amount": 30.0,
+        "category": "Transportation",
+        "date": "2026-06-05",
+        "note": "",
+        "tags": [
+            "Rickshaw"
+        ],
+        "priority": "low",
+        "payment_method": "Cash",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-06-07T23:09:23.816307"
+    },
+    {
+        "id": "exp_eee6081d",
+        "title": "Lunch",
+        "amount": 100.0,
+        "category": "Dining Out",
+        "date": "2026-06-03",
+        "note": "",
+        "tags": [
+            "Chicken Khichori"
+        ],
+        "priority": "low",
+        "payment_method": "Cash",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-06-03T21:22:21.654086"
+    },
+    {
+        "id": "exp_9c1372d7",
+        "title": "Transport",
+        "amount": 180.0,
+        "category": "Transportation",
+        "date": "2026-06-03",
+        "note": "",
+        "tags": [
+            "Bus",
+            "Rickshaw"
+        ],
+        "priority": "low",
+        "payment_method": "Credit Card",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-06-03T21:21:14.611114"
+    },
+    {
+        "id": "exp_eaf690dc",
+        "title": "Transport",
+        "amount": 10.0,
+        "category": "Transportation",
+        "date": "2026-06-02",
+        "note": "",
+        "tags": [
+            "Rickshaw"
+        ],
+        "priority": "low",
+        "payment_method": "Cash",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-06-02T20:38:50.002068"
+    },
+    {
+        "id": "exp_ba220f59",
+        "title": "water Battle",
+        "amount": 40.0,
+        "category": "Groceries",
+        "date": "2026-05-31",
+        "note": "",
+        "tags": [
+            "water Battle"
+        ],
+        "priority": "low",
+        "payment_method": "Cash",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-05-31T23:51:12.011811"
+    },
+    {
+        "id": "exp_378b3f67",
+        "title": "Eid Shooping",
+        "amount": 4200.0,
+        "category": "Shopping",
+        "date": "2026-05-26",
+        "note": "",
+        "tags": [
+            "Pants",
+            "Shirts"
+        ],
+        "priority": "medium",
+        "payment_method": "Cash",
+        "status": "completed",
+        "favorite": false,
+        "important": false,
+        "created_at": "2026-05-26T20:30:27.923234"
+    }
+]

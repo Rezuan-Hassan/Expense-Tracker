@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraFinance — Premium Personal Wealth & Expense Dashboard</title>
+  
+  <!-- Premium FontAwesome CDN for modern line-art icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Core Design Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       LOCAL PIN SECURITY LOCK SCREEN OVERLAY
+       ========================================================================== -->
+  <div id="lockScreen" class="lock-screen">
+    <div class="lock-container">
+      <div class="lock-logo">
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-vault"></i>
+        </div>
+        <h2>AuraFinance</h2>
+        <p id="lockScreenMessage">Enter Security PIN to Unlock Session</p>
+      </div>
+      
+      <div class="pin-display">
+        <div class="pin-dot" id="pin-dot-1"></div>
+        <div class="pin-dot" id="pin-dot-2"></div>
+        <div class="pin-dot" id="pin-dot-3"></div>
+        <div class="pin-dot" id="pin-dot-4"></div>
+      </div>
+      
+      <div class="pin-error" id="pinErrorMessage"></div>
+      
+      <div class="pin-keyboard">
+        <button class="pin-btn" onclick="pressPinNum(1)">1</button>
+        <button class="pin-btn" onclick="pressPinNum(2)">2</button>
+        <button class="pin-btn" onclick="pressPinNum(3)">3</button>
+        <button class="pin-btn" onclick="pressPinNum(4)">4</button>
+        <button class="pin-btn" onclick="pressPinNum(5)">5</button>
+        <button class="pin-btn" onclick="pressPinNum(6)">6</button>
+        <button class="pin-btn" onclick="pressPinNum(7)">7</button>
+        <button class="pin-btn" onclick="pressPinNum(8)">8</button>
+        <button class="pin-btn" onclick="pressPinNum(9)">9</button>
+        <button class="pin-btn action" onclick="clearPin()">Clear</button>
+        <button class="pin-btn" onclick="pressPinNum(0)">0</button>
+        <button class="pin-btn action" onclick="deletePinDigit()"><i class="fa-solid fa-delete-left"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN SYSTEM VIEWPORTS
+       ========================================================================== -->
+  <div class="app-container">
+    
+    <!-- LEFT NAVIGATION SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo-section">
+        <div class="logo-dot"></div>
+        <span class="logo-text">AuraFinance</span>
+      </div>
+      
+      <nav class="nav-menu">
+        <li class="nav-item active" data-panel="dashboard">
+          <a class="nav-link"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        </li>
+        <li class="nav-item" data-panel="overview">
+          <a class="nav-link"><i class="fa-solid fa-chart-column"></i> Overview</a>
+        </li>
+        <li class="nav-item" data-panel="expenses">
+          <a class="nav-link"><i class="fa-solid fa-wallet"></i> Expenses</a>
+        </li>
+        <li class="nav-item" data-panel="income">
+          <a class="nav-link"><i class="fa-solid fa-money-bill-trend-up"></i> Income</a>
+        </li>
+        <li class="nav-item" data-panel="budgets">
+          <a class="nav-link"><i class="fa-solid fa-scale-balanced"></i> Budgets</a>
+        </li>
+        <li class="nav-item" data-panel="categories">
+          <a class="nav-link"><i class="fa-solid fa-tags"></i> Categories</a>
+        </li>
+        <li class="nav-item" data-panel="recurring">
+          <a class="nav-link"><i class="fa-solid fa-arrows-rotate"></i> Recurring</a>
+        </li>
+        <li class="nav-item" data-panel="goals">
+          <a class="nav-link"><i class="fa-solid fa-bullseye"></i> Savings Goals</a>
+        </li>
+        <li class="nav-item" data-panel="logs">
+          <a class="nav-link"><i class="fa-solid fa-list-check"></i> Audit Logs</a>
+        </li>
+        <li class="nav-item" data-panel="settings">
+          <a class="nav-link"><i class="fa-solid fa-sliders"></i> Settings</a>
+        </li>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-avatar">AD</div>
+        <div class="user-info">
+          <div class="name">Admin User</div>
+          <div class="role">Local Vault Mode</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN WORKSPACE -->
+    <main class="main-content">
+      
+      <!-- Top header strip -->
+      <header class="top-header">
+        <div class="header-title">
+          <h1 id="pageTitle">Dashboard</h1>
+          <p id="pageSubtitle">Automated financial tracking and spending forecasts</p>
+        </div>
+        
+        <div class="header-actions">
+          <div class="status-pill">
+            <i class="fa-solid fa-clock"></i>
+            <span id="liveClock">2026-05-26 13:46:00</span>
+          </div>
+          <button class="skeuo-button-teal" id="lockAppBtn"><i class="fa-solid fa-lock"></i> Lock Vault</button>
+        </div>
+      </header>
+
+      <!-- Dynamic Undo Banner -->
+      <div id="undoBanner" class="undo-banner" style="display: none;">
+        <span><i class="fa-solid fa-clock-rotate-left"></i> Transaction record deleted successfully.</span>
+        <button class="skeuo-button-gold" id="undoActionBtn" style="padding: 8px 16px; font-size: 12px;">Undo Delete</button>
+      </div>
+
+      <!-- ==========================================================================
+           PANEL VIEW: DASHBOARD (OVERVIEW)
+           ========================================================================== -->
+      <section id="panel-dashboard" class="page-panel active">
+        <!-- Top Metrics Cards Grid -->
+        <div class="metrics-grid">
+          <!-- Card 1: Current Month Income -->
+          <div class="skeuo-card">
+            <div class="metric-header">
+              <span>CURRENT MONTH INCOME</span>
+              <span class="dot" style="background: var(--color-teal-light);"></span>
+            </div>
+            <div class="metric-value" id="cardMonthIncome">$0.00</div>
+            <div class="metric-footer">
+              <div class="metric-trend up">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>This month</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 2: Current Month Expense -->
+          <div class="skeuo-card">
+            <div class="metric-header">
+              <span>CURRENT MONTH EXPENSE</span>
+              <span class="dot" style="background: var(--color-magenta);"></span>
+            </div>
+            <div class="metric-value" id="cardMonthExpense">$0.00</div>
+            <div class="metric-footer">
+              <div class="metric-trend down">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>This month</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Current Month Savings -->
+          <div class="skeuo-card">
+            <div class="metric-header">
+              <span>CURRENT MONTH SAVINGS</span>
+              <span class="dot" style="background: var(--color-gold);"></span>
+            </div>
+            <div class="metric-value" id="cardMonthSavings">$0.00</div>
+            <div class="metric-footer">
+              <div class="metric-trend up">
+                <i class="fa-solid fa-piggy-bank"></i>
+                <span>This month</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Current Year Income -->
+          <div class="skeuo-card">
+            <div class="metric-header">
+              <span>CURRENT YEAR INCOME</span>
+              <span class="dot" style="background: var(--color-teal-light);"></span>
+            </div>
+            <div class="metric-value" id="cardYearIncome">$0.00</div>
+            <div class="metric-footer">
+              <div class="metric-trend up">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>This year</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Current Year Expense -->
+          <div class="skeuo-card">
+            <div class="metric-header">
+              <span>CURRENT YEAR EXPENSE</span>
+              <span class="dot" style="background: var(--color-magenta);"></span>
+            </div>
+            <div class="metric-value" id="cardYearExpense">$0.00</div>
+            <div class="metric-footer">
+              <div class="metric-trend down">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>This year</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Current Year Savings -->
+          <div class="skeuo-card">
+            <div class="metric-header">
+              <span>CURRENT YEAR SAVINGS</span>
+              <span class="dot" style="background: var(--color-gold);"></span>
+            </div>
+            <div class="metric-value" id="cardYearSavings">$0.00</div>
+            <div class="metric-footer">
+              <div class="metric-trend up">
+                <i class="fa-solid fa-piggy-bank"></i>
+                <span>This year</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Spline Area HTML Canvas Chart Container -->
+        <div class="skeuo-card chart-container">
+          <div class="chart-header">
+            <h3>"Sachviers" Spline Spending & Cashflow Analytics</h3>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-color" style="background: var(--color-teal-light);"></span>
+                <span>Income Trend</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background: var(--color-magenta);"></span>
+                <span>Expenses Trend</span>
+              </div>
+            </div>
+          </div>
+          <!-- Custom HTML Canvas Drawing Context -->
+          <canvas id="chartCanvas" height="320"></canvas>
+        </div>
+
+        <!-- Double Grid layout: Budgets status & Recent lists -->
+        <div class="dashboard-grid">
+          <!-- Left: Recent items list -->
+          <div class="skeuo-card">
+            <div class="chart-header" style="margin-bottom: 20px;">
+              <h3>Recent Transactions History</h3>
+              <button class="skeuo-button-teal" onclick="navigateToPanel('expenses')" style="padding: 8px 16px; font-size: 12px;">Manage</button>
+            </div>
+            <div class="skeuo-table-container">
+              <table class="skeuo-table" id="dashboardRecentTable">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="4" style="text-align: center;">Querying latest database rows...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right: Budget Overviews -->
+          <div class="skeuo-card">
+            <div class="chart-header" style="margin-bottom: 20px;">
+              <h3>Active Budgets</h3>
+              <button class="skeuo-button-teal" onclick="navigateToPanel('budgets')" style="padding: 8px 16px; font-size: 12px;">Set Limit</button>
+            </div>
+            <div id="dashboardBudgetsList" style="display:flex; flex-direction:column; gap:20px;">
+              <!-- Budgets injected dynamically -->
+              <p style="text-align:center; color:var(--text-secondary);">Analyzing monthly limits...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: OVERVIEW
+           ========================================================================== -->
+      <section id="panel-overview" class="page-panel">
+        <!-- Overview Tab Switcher -->
+        <div class="overview-header-bar" style="margin-bottom: 28px; display: flex; justify-content: flex-start;">
+          <div class="skeuo-pills-selector">
+            <button class="pill-btn active" id="pillBtnMonthly" onclick="switchOverviewTab('monthly')">Monthly Overview</button>
+            <button class="pill-btn" id="pillBtnYearly" onclick="switchOverviewTab('yearly')">Yearly Overview</button>
+          </div>
+        </div>
+
+        <!-- Monthly Overview Panel Content -->
+        <div id="overviewMonthlyContent" class="overview-tab-content active">
+          <!-- Monthly Stats Grid -->
+          <div class="metrics-grid">
+            <!-- Total Income Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TOTAL INCOME</span>
+                <div id="badgeMonthIncomeComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statMonthIncome">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Total income this month</span>
+              </div>
+            </div>
+
+            <!-- Total Expenses Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TOTAL EXPENSES</span>
+                <div id="badgeMonthExpenseComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statMonthExpense">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Total expenses this month</span>
+              </div>
+            </div>
+
+            <!-- Net Balance Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>NET BALANCE</span>
+                <div id="badgeMonthNetComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statMonthNetBalance">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Net balance this month</span>
+              </div>
+            </div>
+
+            <!-- Savings Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>SAVINGS</span>
+                <div id="badgeMonthSavingsComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statMonthSavings">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Savings generated this month</span>
+              </div>
+            </div>
+
+            <!-- Top Spending Category Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TOP SPENDING CATEGORY</span>
+                <span class="dot" style="background: var(--color-gold);"></span>
+              </div>
+              <div class="metric-value" id="statMonthTopCategory" style="font-size: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 5px 0;">None</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span id="statMonthTopCategoryAmount">Spent: $0.00</span>
+              </div>
+            </div>
+
+            <!-- Number of Transactions Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TRANSACTIONS COUNT</span>
+                <span class="dot" style="background: var(--color-teal-light);"></span>
+              </div>
+              <div class="metric-value" id="statMonthTransactions">0</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Items logged this month</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monthly Trend and Category Breakdown charts row -->
+          <div class="dashboard-grid" style="margin-top: 28px;">
+            <div class="skeuo-card chart-container">
+              <div class="chart-header">
+                <h3>Monthly Trends (Current Year)</h3>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-color" style="background: var(--color-teal-light);"></span>
+                    <span>Income Trend</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-color" style="background: var(--color-magenta);"></span>
+                    <span>Expenses Trend</span>
+                  </div>
+                </div>
+              </div>
+              <canvas id="chartMonthTrends" height="280"></canvas>
+            </div>
+
+            <div class="skeuo-card chart-container">
+              <div class="chart-header">
+                <h3>Spending Category Breakdown (Month)</h3>
+              </div>
+              <canvas id="chartMonthCategory" height="280"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yearly Overview Panel Content -->
+        <div id="overviewYearlyContent" class="overview-tab-content" style="display: none;">
+          <!-- Yearly Stats Grid -->
+          <div class="metrics-grid">
+            <!-- Total Income Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TOTAL INCOME</span>
+                <div id="badgeYearIncomeComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statYearIncome">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Total income this year</span>
+              </div>
+            </div>
+
+            <!-- Total Expenses Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TOTAL EXPENSES</span>
+                <div id="badgeYearExpenseComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statYearExpense">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Total expenses this year</span>
+              </div>
+            </div>
+
+            <!-- Net Balance Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>NET BALANCE</span>
+                <div id="badgeYearNetComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statYearNetBalance">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Net balance this year</span>
+              </div>
+            </div>
+
+            <!-- Savings Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>SAVINGS</span>
+                <div id="badgeYearSavingsComparison" class="comparison-badge">--</div>
+              </div>
+              <div class="metric-value" id="statYearSavings">$0.00</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Savings generated this year</span>
+              </div>
+            </div>
+
+            <!-- Top Spending Category Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TOP SPENDING CATEGORY</span>
+                <span class="dot" style="background: var(--color-gold);"></span>
+              </div>
+              <div class="metric-value" id="statYearTopCategory" style="font-size: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 5px 0;">None</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span id="statYearTopCategoryAmount">Spent: $0.00</span>
+              </div>
+            </div>
+
+            <!-- Number of Transactions Card -->
+            <div class="skeuo-card">
+              <div class="metric-header">
+                <span>TOTAL TRANSACTIONS</span>
+                <span class="dot" style="background: var(--color-teal-light);"></span>
+              </div>
+              <div class="metric-value" id="statYearTransactions">0</div>
+              <div class="metric-footer" style="font-size: 12px; color: var(--text-secondary);">
+                <span>Items logged this year</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yearly Trends and Category Breakdown charts row -->
+          <div class="dashboard-grid" style="margin-top: 28px;">
+            <div class="skeuo-card chart-container">
+              <div class="chart-header">
+                <h3>Year-over-Year Trends</h3>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-color" style="background: var(--color-teal-light);"></span>
+                    <span>Income Trend</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-color" style="background: var(--color-magenta);"></span>
+                    <span>Expenses Trend</span>
+                  </div>
+                </div>
+              </div>
+              <canvas id="chartYearTrends" height="280"></canvas>
+            </div>
+
+            <div class="skeuo-card chart-container">
+              <div class="chart-header">
+                <h3>Spending Category Breakdown (Year)</h3>
+              </div>
+              <canvas id="chartYearCategory" height="280"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: EXPENSES
+           ========================================================================== -->
+      <section id="panel-expenses" class="page-panel">
+        <div class="skeuo-card">
+          <!-- Filters & Header Row -->
+          <div class="table-controls">
+            <div class="filter-group">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="skeuo-input" id="expenseSearchInput" placeholder="Search title, tags, notes...">
+              </div>
+              <select class="skeuo-input" id="expenseCategoryFilter" style="width: auto;">
+                <option value="">All Categories</option>
+              </select>
+              <select class="skeuo-input" id="expensePriorityFilter" style="width: auto;">
+                <option value="">All Priorities</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <button class="skeuo-button-teal" id="addExpenseBtn"><i class="fa-solid fa-plus"></i> Add Expense</button>
+              <button class="skeuo-button-gold" id="bulkDeleteExpenseBtn" style="display: none;"><i class="fa-solid fa-trash-can"></i> Delete Selected</button>
+            </div>
+          </div>
+
+          <!-- Master Data Table -->
+          <div class="skeuo-table-container">
+            <table class="skeuo-table" id="expensesTable">
+              <thead>
+                <tr>
+                  <th style="width: 40px;"><input type="checkbox" id="expenseSelectAllCheckbox" class="select-row-checkbox"></th>
+                  <th>Title</th>
+                  <th>Amount</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Priority</th>
+                  <th>Payment</th>
+                  <th>Tags</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="expensesTableBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination details -->
+          <div class="pagination-container">
+            <span style="font-size: 13px; color: var(--text-secondary);" id="expensePaginationText">Showing 0 of 0 items</span>
+            <div class="pagination-buttons">
+              <button class="btn-icon" id="expensePrevPageBtn"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="btn-icon" id="expenseNextPageBtn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: INCOME
+           ========================================================================== -->
+      <section id="panel-income" class="page-panel">
+        <div class="skeuo-card">
+          <div class="table-controls">
+            <div class="filter-group">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="skeuo-input" id="incomeSearchInput" placeholder="Search income source...">
+              </div>
+              <select class="skeuo-input" id="incomeSourceTypeFilter" style="width: auto;">
+                <option value="">All Sources</option>
+                <option value="salary">Salary</option>
+                <option value="passive">Passive Income</option>
+                <option value="side">Side Hustle</option>
+              </select>
+            </div>
+            
+            <button class="skeuo-button-teal" id="addIncomeBtn"><i class="fa-solid fa-plus"></i> Add Income</button>
+          </div>
+
+          <div class="skeuo-table-container">
+            <table class="skeuo-table" id="incomeTable">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Amount</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Date</th>
+                  <th>Notes</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="incomeTableBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: BUDGETS
+           ========================================================================== -->
+      <section id="panel-budgets" class="page-panel">
+        <div class="skeuo-card">
+          <div class="table-controls">
+            <h3>Manage Periodic Category Budgets</h3>
+            <button class="skeuo-button-teal" id="addBudgetBtn"><i class="fa-solid fa-plus"></i> Set Category Budget</button>
+          </div>
+
+          <div class="skeuo-table-container">
+            <table class="skeuo-table" id="budgetsTable">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Budget Limit</th>
+                  <th>Spent This Month</th>
+                  <th>Remaining</th>
+                  <th>Period</th>
+                  <th>Progress</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="budgetsTableBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: CATEGORIES
+           ========================================================================== -->
+      <section id="panel-categories" class="page-panel">
+        <div class="skeuo-card">
+          <div class="table-controls">
+            <h3>Visual Category Management System</h3>
+            <button class="skeuo-button-teal" id="addCategoryBtn"><i class="fa-solid fa-plus"></i> Add Custom Category</button>
+          </div>
+
+          <div class="category-grid" id="categoryGrid">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: RECURRING TRANSACTIONS
+           ========================================================================== -->
+      <section id="panel-recurring" class="page-panel">
+        <div class="skeuo-card">
+          <div class="table-controls">
+            <h3>Recurring Subscription & Income Payout Schedules</h3>
+            <button class="skeuo-button-teal" id="addRecurringBtn"><i class="fa-solid fa-plus"></i> Add Recurring Schedule</button>
+          </div>
+
+          <div class="skeuo-table-container">
+            <table class="skeuo-table" id="recurringTable">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Amount</th>
+                  <th>Flow Type</th>
+                  <th>Category</th>
+                  <th>Frequency</th>
+                  <th>Next Payout Date</th>
+                  <th>Last Generated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recurringTableBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: SAVINGS GOALS
+           ========================================================================== -->
+      <section id="panel-goals" class="page-panel">
+        <div class="skeuo-card">
+          <div class="table-controls">
+            <h3>Savings & Long-Term Investment Goals</h3>
+            <button class="skeuo-button-teal" id="addGoalBtn"><i class="fa-solid fa-plus"></i> Set New Goal</button>
+          </div>
+
+          <div class="goals-grid" id="goalsGrid">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: SYSTEM AUDIT LOGS
+           ========================================================================== -->
+      <section id="panel-logs" class="page-panel">
+        <div class="skeuo-card">
+          <div class="table-controls">
+            <h3>System Operations Audit Trail</h3>
+            <button class="skeuo-button-teal" id="refreshLogsBtn"><i class="fa-solid fa-arrows-rotate"></i> Refresh Logs</button>
+          </div>
+          
+          <div class="logs-list" id="logsListContainer">
+            <!-- Dynamic logs will be injected here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PANEL VIEW: SETTINGS
+           ========================================================================== -->
+      <section id="panel-settings" class="page-panel">
+        <div class="dashboard-grid">
+          <!-- Left settings panel -->
+          <div class="skeuo-card" style="display:flex; flex-direction:column; gap:24px;">
+            <h3>App Customizations & Configurations</h3>
+            
+            <div class="form-group">
+              <label for="settingsCurrency">Preferred Currency Symbol</label>
+              <select class="skeuo-input" id="settingsCurrency">
+                <option value="USD|$">USD ($)</option>
+                <option value="EUR|€">EUR (€)</option>
+                <option value="GBP|£">GBP (£)</option>
+                <option value="JPY|¥">JPY (¥)</option>
+                <option value="INR|₹">INR (₹)</option>
+                <option value="BDT|৳">BDT (৳)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="settingsDateFormat">Date Presentation Format</label>
+              <select class="skeuo-input" id="settingsDateFormat">
+                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+              </select>
+            </div>
+
+            <!-- PIN Lock Security config -->
+            <div class="skeuo-card" style="margin-top:10px; background:rgba(185,175,160,0.05);">
+              <h4 style="margin-bottom:12px; color:var(--color-teal-deep);"><i class="fa-solid fa-key"></i> Vault Passcode Security</h4>
+              
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                <label for="settingsPinEnabled" style="font-weight:600; cursor:pointer;">Enforce PIN lock on startup</label>
+                <input type="checkbox" id="settingsPinEnabled" class="select-row-checkbox" style="width:22px; height:22px;">
+              </div>
+
+              <div class="form-group" id="settingsPinGroup" style="display: none;">
+                <label for="settingsPinValue">Set New 4-Digit Security PIN</label>
+                <input type="password" maxlength="4" class="skeuo-input" id="settingsPinValue" placeholder="E.g. 1234">
+              </div>
+            </div>
+
+            <button class="skeuo-button-teal" id="saveSettingsBtn" style="align-self:flex-start;"><i class="fa-solid fa-floppy-disk"></i> Save Configurations</button>
+          </div>
+
+          <!-- Right database imports/exports and backups panel -->
+          <div class="skeuo-card" style="display:flex; flex-direction:column; gap:24px;">
+            <h3>Local Database Backups & Portability</h3>
+            
+            <div class="form-group">
+              <label>Import Data (JSON / CSV)</label>
+              <div style="display:flex; gap:12px; margin-top:8px;">
+                <button class="skeuo-button-gold" id="triggerImportBtn" style="flex-grow:1;"><i class="fa-solid fa-file-import"></i> Upload CSV/JSON</button>
+                <input type="file" id="dataImportInput" accept=".json,.csv" style="display: none;">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Download Consolidated Exports</label>
+              <div style="display:flex; gap:12px; margin-top:8px;">
+                <button class="skeuo-button-teal" id="exportCsvBtn" style="flex-grow:1;"><i class="fa-solid fa-file-csv"></i> Download CSV</button>
+                <button class="skeuo-button-teal" id="exportJsonBtn" style="flex-grow:1;"><i class="fa-solid fa-file-code"></i> Download JSON</button>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top:12px; border-top:1.5px solid rgba(185,175,160,0.15); padding-top:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <label style="padding-left:0;">System Rollback Backups</label>
+                <button class="skeuo-button-gold" id="createBackupBtn" style="padding: 8px 16px; font-size:12px;"><i class="fa-solid fa-floppy-disk"></i> Create Backup</button>
+              </div>
+
+              <!-- List active backups -->
+              <div id="backupsList" style="display:flex; flex-direction:column; gap:12px; max-height:220px; overflow-y:auto; padding-right:6px;">
+                <p style="font-size:12px; color:var(--text-secondary); text-align:center;">Checking for automatic backups...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       MODALS SYSTEM (TRANSACTION MANAGEMENT INTERACTION OVERLAYS)
+       ========================================================================== -->
+
+  <!-- EXPENSE ADD/EDIT MODAL -->
+  <div class="modal-overlay" id="modalExpense">
+    <div class="skeuo-card modal-container">
+      <div class="modal-header">
+        <h2 id="expenseModalTitle">Register New Expense</h2>
+        <button class="modal-close" onclick="closeModal('modalExpense')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form class="modal-form" id="expenseForm" onsubmit="saveExpense(event)">
+        <input type="hidden" id="formExpenseId">
+        
+        <div class="form-group">
+          <label for="expenseTitle">Expense Description / Title *</label>
+          <input type="text" class="skeuo-input" id="expenseTitle" placeholder="E.g. Whole Foods Groceries" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expenseAmount">Amount ($) *</label>
+            <input type="number" step="0.01" class="skeuo-input" id="expenseAmount" placeholder="0.00" required>
+          </div>
+          <div class="form-group">
+            <label for="expenseCategory">Expense Category</label>
+            <select class="skeuo-input" id="expenseCategory">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expenseDate">Date *</label>
+            <input type="date" class="skeuo-input" id="expenseDate" required>
+          </div>
+          <div class="form-group">
+            <label for="expensePriority">Transaction Priority</label>
+            <select class="skeuo-input" id="expensePriority">
+              <option value="low">Low Priority</option>
+              <option value="medium" selected>Medium Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expensePayment">Payment Method</label>
+            <select class="skeuo-input" id="expensePayment">
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="Cash">Cash</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="expenseStatus">Transaction Status</label>
+            <select class="skeuo-input" id="expenseStatus">
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="expenseTags">Tags (Comma-separated)</label>
+          <input type="text" class="skeuo-input" id="expenseTags" placeholder="E.g. shopping, food, organic">
+        </div>
+
+        <div class="form-group">
+          <label for="expenseNote">Internal Transaction Note</label>
+          <textarea class="skeuo-input" id="expenseNote" placeholder="Additional details, attachments, or metadata..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="skeuo-button-gold" onclick="closeModal('modalExpense')">Cancel</button>
+          <button type="submit" class="skeuo-button-teal">Save Transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- INCOME ADD/EDIT MODAL -->
+  <div class="modal-overlay" id="modalIncome">
+    <div class="skeuo-card modal-container">
+      <div class="modal-header">
+        <h2 id="incomeModalTitle">Register New Income Flow</h2>
+        <button class="modal-close" onclick="closeModal('modalIncome')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form class="modal-form" id="incomeForm" onsubmit="saveIncome(event)">
+        <input type="hidden" id="formIncomeId">
+        
+        <div class="form-group">
+          <label for="incomeTitle">Income Payout Description *</label>
+          <input type="text" class="skeuo-input" id="incomeTitle" placeholder="E.g. Web Consulting Payout" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="incomeAmount">Amount ($) *</label>
+            <input type="number" step="0.01" class="skeuo-input" id="incomeAmount" placeholder="0.00" required>
+          </div>
+          <div class="form-group">
+            <label for="incomeCategory">Income Category</label>
+            <select class="skeuo-input" id="incomeCategory">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="incomeDate">Date *</label>
+            <input type="date" class="skeuo-input" id="incomeDate" required>
+          </div>
+          <div class="form-group">
+            <label for="incomeSourceType">Income Source Type</label>
+            <select class="skeuo-input" id="incomeSourceType">
+              <option value="salary">Salary & Wages</option>
+              <option value="passive">Passive Dividends</option>
+              <option value="side">Side Hustle Contract</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="incomeNote">Reference Notes</label>
+          <textarea class="skeuo-input" id="incomeNote" placeholder="Invoice details, contractor information, etc..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="skeuo-button-gold" onclick="closeModal('modalIncome')">Cancel</button>
+          <button type="submit" class="skeuo-button-teal">Save Income Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- BUDGET SET MODAL -->
+  <div class="modal-overlay" id="modalBudget">
+    <div class="skeuo-card modal-container" style="max-width: 480px;">
+      <div class="modal-header">
+        <h2 id="budgetModalTitle">Configure Category Budget Limit</h2>
+        <button class="modal-close" onclick="closeModal('modalBudget')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form class="modal-form" id="budgetForm" onsubmit="saveBudget(event)">
+        <input type="hidden" id="formBudgetId">
+        
+        <div class="form-group">
+          <label for="budgetCategory">Target Category</label>
+          <select class="skeuo-input" id="budgetCategory">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="budgetLimit">Spending Limit Limit ($) *</label>
+          <input type="number" step="0.01" class="skeuo-input" id="budgetLimit" placeholder="0.00" required>
+        </div>
+
+        <div class="form-group">
+          <label for="budgetPeriod">Time Period Limit</label>
+          <select class="skeuo-input" id="budgetPeriod">
+            <option value="daily">Daily Budget</option>
+            <option value="weekly">Weekly Budget</option>
+            <option value="monthly" selected>Monthly Budget</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="skeuo-button-gold" onclick="closeModal('modalBudget')">Cancel</button>
+          <button type="submit" class="skeuo-button-teal">Establish Budget</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CUSTOM CATEGORY ADD MODAL -->
+  <div class="modal-overlay" id="modalCategory">
+    <div class="skeuo-card modal-container" style="max-width: 480px;">
+      <div class="modal-header">
+        <h2 id="categoryModalTitle">Establish Custom Category</h2>
+        <button class="modal-close" onclick="closeModal('modalCategory')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form class="modal-form" id="categoryForm" onsubmit="saveCategory(event)">
+        <input type="hidden" id="formCategoryId">
+        
+        <div class="form-group">
+          <label for="categoryName">Category Title / Name *</label>
+          <input type="text" class="skeuo-input" id="categoryName" placeholder="E.g. Health & Gym" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="categoryColor">Color Representation *</label>
+            <!-- Sleek input picker -->
+            <input type="color" class="skeuo-input" id="categoryColor" value="#0D5D61" style="height: 52px; padding: 4px 12px; cursor: pointer;">
+          </div>
+          <div class="form-group">
+            <label for="categoryIcon">FontAwesome Icon Class</label>
+            <select class="skeuo-input" id="categoryIcon">
+              <option value="tag" selected>Tag Icon</option>
+              <option value="utensils">Food & Fork</option>
+              <option value="shopping-basket">Shopping Cart</option>
+              <option value="home">House / Shelter</option>
+              <option value="car">Automobile</option>
+              <option value="bolt">Lightning / Utility</option>
+              <option value="film">Entertainment Film</option>
+              <option value="piggy-bank">Piggy Bank</option>
+              <option value="dumbbell">Dumbbell Gym</option>
+              <option value="heart-pulse">Medical Red Cross</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="categoryParent">Parent Category (Optional)</label>
+          <select class="skeuo-input" id="categoryParent">
+            <option value="">No Parent (Root Category)</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="skeuo-button-gold" onclick="closeModal('modalCategory')">Cancel</button>
+          <button type="submit" class="skeuo-button-teal">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- RECURRING ADD/EDIT MODAL -->
+  <div class="modal-overlay" id="modalRecurring">
+    <div class="skeuo-card modal-container">
+      <div class="modal-header">
+        <h2 id="recurringModalTitle">Establish New Recurring Pattern</h2>
+        <button class="modal-close" onclick="closeModal('modalRecurring')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form class="modal-form" id="recurringForm" onsubmit="saveRecurring(event)">
+        <input type="hidden" id="formRecurringId">
+        
+        <div class="form-group">
+          <label for="recurringTitle">Schedule Title / Description *</label>
+          <input type="text" class="skeuo-input" id="recurringTitle" placeholder="E.g. Gym Membership Fee" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recurringAmount">Amount ($) *</label>
+            <input type="number" step="0.01" class="skeuo-input" id="recurringAmount" placeholder="0.00" required>
+          </div>
+          <div class="form-group">
+            <label for="recurringType">Flow Direction</label>
+            <select class="skeuo-input" id="recurringType">
+              <option value="expense" selected>Expense Allocation</option>
+              <option value="income">Income Payout Receipt</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recurringCategory">Category Assignment</label>
+            <select class="skeuo-input" id="recurringCategory">
+              <!-- Injected dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="recurringFrequency">Frequency Cycle</label>
+            <select class="skeuo-input" id="recurringFrequency">
+              <option value="daily">Daily Schedule</option>
+              <option value="weekly">Weekly Schedule</option>
+              <option value="monthly" selected>Monthly Schedule</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recurringNextDate">Next Trigger Date *</label>
+            <input type="date" class="skeuo-input" id="recurringNextDate" required>
+          </div>
+          <div class="form-group">
+            <label for="recurringPriority">Transaction Priority</label>
+            <select class="skeuo-input" id="recurringPriority">
+              <option value="low">Low Priority</option>
+              <option value="medium" selected>Medium Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recurringNote">Reference Description Notes</label>
+          <textarea class="skeuo-input" id="recurringNote" placeholder="Additional details, bank mandate details..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="skeuo-button-gold" onclick="closeModal('modalRecurring')">Cancel</button>
+          <button type="submit" class="skeuo-button-teal">Schedule Cycle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SAVINGS GOAL ADD/EDIT MODAL -->
+  <div class="modal-overlay" id="modalGoal">
+    <div class="skeuo-card modal-container" style="max-width: 480px;">
+      <div class="modal-header">
+        <h2 id="goalModalTitle">Establish New Financial Target</h2>
+        <button class="modal-close" onclick="closeModal('modalGoal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form class="modal-form" id="goalForm" onsubmit="saveGoal(event)">
+        <input type="hidden" id="formGoalId">
+        
+        <div class="form-group">
+          <label for="goalTitle">Savings Goal / Description *</label>
+          <input type="text" class="skeuo-input" id="goalTitle" placeholder="E.g. European Summer Holiday" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="goalTargetAmount">Target Amount ($) *</label>
+            <input type="number" step="0.01" class="skeuo-input" id="goalTargetAmount" placeholder="0.00" required>
+          </div>
+          <div class="form-group">
+            <label for="goalCurrentAmount">Currently Accumulated ($)</label>
+            <input type="number" step="0.01" class="skeuo-input" id="goalCurrentAmount" value="0.00">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="goalCategory">Allocation Category</label>
+            <select class="skeuo-input" id="goalCategory">
+              <!-- Injected dynamically -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="goalTargetDate">Expected Target Date</label>
+            <input type="date" class="skeuo-input" id="goalTargetDate">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="skeuo-button-gold" onclick="closeModal('modalGoal')">Cancel</button>
+          <button type="submit" class="skeuo-button-teal">Establish Goal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DYNAMIC TOAST CONTAINER FOR Micro-feedback messages -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Core Dashboard Application controller logic -->
+  <script src="script.js"></script>
+</body>
+</html>
